@@ -15,6 +15,7 @@ export default function RegisterPasswordForm() {
       <Input
         name="password"
         id="password"
+        type="password"
         value={password}
         onChange={handleInputChange}
         placeholder="숫자, 영문포함 8자 이상"
@@ -23,6 +24,7 @@ export default function RegisterPasswordForm() {
       <Input
         name="passwordConfirm"
         id="passwordConfirm"
+        type="password"
         value={passwordConfirm}
         onChange={handleInputChange}
         placeholder="비밀번호 재입력"

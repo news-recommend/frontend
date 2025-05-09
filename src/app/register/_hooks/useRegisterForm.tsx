@@ -50,6 +50,7 @@ export default function useRegisterEmailForm() {
           return;
         }
         router.push("/register/name");
+        break;
       }
       case "name": {
         if (registerForm.name === "") {

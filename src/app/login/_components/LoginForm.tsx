@@ -24,6 +24,7 @@ export default function LoginForm() {
       <Input
         name="password"
         id="password"
+        type="password"
         value={password}
         onChange={handleChange}
         placeholder="비밀번호"
