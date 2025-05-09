@@ -1,7 +1,7 @@
 "use client";
-import Input from "@/app/components/shared/Input";
+import Input from "@/components/shared/Input";
 import React, { useState } from "react";
-import Button from "@/app/components/shared/Button";
+import Button from "@/components/shared/Button";
 import useRegisterEmailForm from "../../_hooks/useRegisterForm";
 
 export default function RegisterNameForm() {

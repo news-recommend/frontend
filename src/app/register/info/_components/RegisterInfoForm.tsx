@@ -1,9 +1,9 @@
 "use client";
-import Input from "@/app/components/shared/Input";
+import Input from "@/components/shared/Input";
 import React, { useState } from "react";
-import Button from "@/app/components/shared/Button";
+import Button from "@/components/shared/Button";
 import useRegisterEmailForm from "../../_hooks/useRegisterForm";
-import Tag from "@/app/components/shared/Tag";
+import Tag from "@/components/shared/Tag";
 
 const PREFERRED_TAGS = ["10대", "20대", "30대", "40대", "50대", "60대 이상"];
 

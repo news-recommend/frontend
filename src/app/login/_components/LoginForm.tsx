@@ -1,8 +1,8 @@
 "use client";
-import Input from "@/app/components/shared/Input";
+import Input from "@/components/shared/Input";
 import React, { useState } from "react";
 import useLoginForm from "../_hooks/useLoginForm";
-import Button from "@/app/components/shared/Button";
+import Button from "@/components/shared/Button";
 
 export default function LoginForm() {
   const {
