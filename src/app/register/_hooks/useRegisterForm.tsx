@@ -73,16 +73,14 @@ export default function useRegisterEmailForm() {
         router.push("/register/category");
         break;
       }
-      case "name": {
+      case "category": {
         console.log(`submitData: ${registerForm}`);
         router.push("/");
         break;
       }
     }
 
-    console.log(
-      `email: ${registerForm.email}\t password: ${registerForm.password}`
-    );
+    console.log(`email: ${registerForm.email}\t password: ${registerForm.password}`);
   };
 
   return {

@@ -38,6 +38,32 @@
   }
 }
 
+@layer utilities {
+  .scrollbar-hide {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
+  }
+}
+
+*::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  height: 80px;
+  background: rgba(217, 217, 217, 1);
+}
+*::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+
 [type="radio"],
 span {
   vertical-align: middle;

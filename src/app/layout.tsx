@@ -40,7 +40,7 @@ export default function RootLayout({
   "
         >
           <Body>
-            <Header>로그인</Header>
+            <Header />
             {children}
             <BottomNavigation />
           </Body>

@@ -17,7 +17,7 @@ export default function Body({ children }: { children: React.ReactNode }) {
     [&::-webkit-scrollbar-thumb]:bg-[#d9d9d9]
     [&::-webkit-scrollbar-button]:w-0
     [&::-webkit-scrollbar-button]:h-0
-    xs:w-[390px] xs:overflow-x-hidden
+    xs:w-[414px] xs:overflow-x-hidden
     
   "
     >
