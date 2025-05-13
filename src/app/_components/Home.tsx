@@ -1,10 +1,13 @@
 import React from "react";
 import HomeCategory from "./HomeCategory";
+import BookmarkCarousel from "./BookmarkCarousel";
 
 const Home = () => {
   return (
     <div>
       <HomeCategory />
+      <BookmarkCarousel />
+      <div className="mx-[24px] mt-[45px] h-[2px]  bg-[#57869F]" />
     </div>
   );
 };

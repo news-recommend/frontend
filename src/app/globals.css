@@ -63,6 +63,18 @@
   width: 0;
   height: 0;
 }
+.slick-dots li {
+  width: 4px !important;
+  height: 4px !important;
+}
+
+.slick-dots li div {
+  background-color: #e5e7eb; /* gray-300 */
+}
+
+.slick-dots li.slick-active div {
+  background-color: #000; /* black */
+}
 
 [type="radio"],
 span {
