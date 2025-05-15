@@ -55,6 +55,7 @@ const AccordionItem = ({ title, description }: { title: string; description: { t
       >
         {description.map((item, idx) => (
           <li
+            key={item.title}
             className={`flex ${
               idx !== description.length - 1 ? "border-[#D9D9D9] border-b" : ""
             }  items-center justify-between px-[18px] py-[12px] `}
