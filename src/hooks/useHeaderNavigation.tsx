@@ -12,20 +12,18 @@ const ROUTES = {
     INFO: "/register/info",
   },
   PROFILE: {
-    EDIT: "/profile/edit",
+    EDIT: "/profile",
   },
   ISSUE: {
-    EDIT: "/issue/edit",
-
     SEARCH: "/issue/search",
   },
+  BOOKMARK: "/bookmark",
 };
 
 export default function useHeaderNavigation() {
   const router = useRouter();
   const pathname = usePathname() || "/";
-  const pathToRegex = (path: string) =>
-    new RegExp("^" + path.replace(/:[^/]+/g, "[^/]+") + "$");
+  const pathToRegex = (path: string) => new RegExp("^" + path.replace(/:[^/]+/g, "[^/]+") + "$");
 
   const checkRoute = {
     startsWith: (route: string) => pathname?.startsWith(route),
@@ -49,7 +47,7 @@ export default function useHeaderNavigation() {
       [ROUTES.REGISTER.NAME]: "회원가입",
       [ROUTES.REGISTER.INFO]: "회원가입",
       [ROUTES.PROFILE.EDIT]: "프로필수정",
-      [ROUTES.ISSUE.EDIT]: "이슈수정",
+      [ROUTES.BOOKMARK]: "이슈수정",
       [ROUTES.ISSUE.SEARCH]: "이슈검색",
     };
     for (const [route, title] of Object.entries(travelMap)) {

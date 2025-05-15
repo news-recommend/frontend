@@ -5,7 +5,7 @@ import Button from "@/components/shared/Button";
 import useRegisterEmailForm from "../../_hooks/useRegisterForm";
 import Tag from "@/components/shared/Tag";
 
-const GENDER_TAGS = ["10대", "20대", "30대", "40대", "50대", "60대 이상"];
+const AGE_GROUP_TAGS = ["10대", "20대", "30대", "40대", "50대", "60대 이상"];
 
 export default function RegisterInfoForm() {
   const {
@@ -21,15 +21,15 @@ export default function RegisterInfoForm() {
       </label>
       <div className="flex items-center  gap-[87px] pl-[68px] text-[#1F2937] font-[400] ">
         <div>
-          <input type="radio" onChange={handleInputChange} id="gender-female" name="gender" value="여자" />
+          <input type="radio" onChange={handleInputChange} id="gender-female" name="gender" value="여성" />
           <label className="inline-flex text-subtitle pt-2 " htmlFor="gender-female">
-            여자
+            여성
           </label>
         </div>
         <div>
-          <input type="radio" onChange={handleInputChange} id="gender-male" name="gender" value="남자" />
+          <input type="radio" onChange={handleInputChange} id="gender-male" name="gender" value="남성" />
           <label className="inline-flex h-[36px] text-subtitle pt-2 " htmlFor="gender-male">
-            남자
+            남성
           </label>
         </div>
       </div>
@@ -37,7 +37,7 @@ export default function RegisterInfoForm() {
         나이를 알려주세요.
       </label>
       <div className="grid mb-[16px] grid-cols-[repeat(3,max-content)] place-content-center grid-cols justify-center gap-[15px]">
-        {GENDER_TAGS.slice(0, 3).map((tag) => (
+        {AGE_GROUP_TAGS.slice(0, 3).map((tag) => (
           <Tag
             text={tag}
             key={tag}
@@ -52,7 +52,7 @@ export default function RegisterInfoForm() {
         ))}
       </div>
       <div className="grid grid-cols-[repeat(3,max-content)] place-content-center grid-cols justify-center gap-[15px]">
-        {GENDER_TAGS.slice(3, 6).map((tag) => (
+        {AGE_GROUP_TAGS.slice(3, 6).map((tag) => (
           <Tag
             text={tag}
             key={tag}

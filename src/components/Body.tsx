@@ -4,7 +4,8 @@ export default function Body({ children }: { children: React.ReactNode }) {
   return (
     <div
       className="
-    w-[100svw] 
+    w-[100svw]
+    overflow-auto 
     relative 
     h-full 
     bg-[#f8f8f8]

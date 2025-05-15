@@ -5,7 +5,7 @@ import useHeaderNavigation from "../hooks/useHeaderNavigation";
 
 export default function Header() {
   const { headerTitle, checkRoute } = useHeaderNavigation();
-  if (checkRoute.exact("/")) return null;
+  if (checkRoute.exact("/") || checkRoute.startsWith("/issue/detail")) return null;
   return (
     <header className="w-full h-[84px] px-[20px] flex justify-between items-center pt-[10px] ">
       <BackButton />

@@ -3,7 +3,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
 const PREFERRED_TAGS = [
-  "ALL",
   "정치",
   "경제",
   "사회",
