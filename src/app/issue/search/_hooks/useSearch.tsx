@@ -5,7 +5,8 @@ import { FormEvent, useEffect, useState } from "react";
 
 const useSearch = () => {
   const params = useParams();
-  const initKeyword = decodeURIComponent(params?.keyword as string) ?? "";
+  const initKeyword =
+    decodeURIComponent((params?.keyword as string) ?? "") ?? "";
   const [keyword, setKeyword] = useState(initKeyword);
 
   const [debouncedValue, setDebouncedValue] = useState<string>(keyword);
