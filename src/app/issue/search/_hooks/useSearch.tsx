@@ -1,10 +1,12 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
 const useSearch = () => {
-  const [keyword, setKeyword] = useState("");
+  const params = useParams();
+  const initKeyword = (params?.keyword as string) ?? "";
+  const [keyword, setKeyword] = useState(initKeyword);
 
   const [debouncedValue, setDebouncedValue] = useState<string>(keyword);
   const pathname = usePathname();
