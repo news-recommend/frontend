@@ -10,7 +10,7 @@ export default function SearchInput({ ...rest }: InputProps) {
         className="border w-full h-full pl-[16px] pr-[36px] py-[10px] bg-white placeholder:text-[#6B7280] border-[#d9d9d9] outline-none rounded-full text-black  "
         {...rest}
       />
-      <button className="w-[20px] h-[20px] absolute right-[6px] top-1/2 -translate-1/2" type="submit">
+      <button type="submit" className="w-[20px] h-[20px] absolute right-[6px] top-1/2 -translate-1/2" type="submit">
         <SearchIcon />
       </button>
     </div>
