@@ -1,11 +1,52 @@
 "use client";
 
+import { axiosInstance, handleApiResponse } from "@/api";
+import { authStore } from "@/store/authStore";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function useLoginForm() {
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
+  });
+  const { setLoginData, clearLoginData, accessToken, resetData, setIsGuestUser } = authStore();
+  const router = useRouter();
+  const loginEmailMutation = useMutation({
+    mutationFn: async (formData: any) => {
+      const response = await axiosInstance.post("/api/users/login", formData);
+      return handleApiResponse(response) as any;
+    },
+    onSuccess: (data: any) => {
+      setLoginData({
+        userId: Number(data.userId),
+        accessToken: data.accessToken,
+      });
+      router.replace("/");
+    },
+    onError: (error: any) => {
+      console.error(error);
+      alert("로그인에 실패하였습니다.");
+    },
+  });
+
+  const refreshTokenMutation = useMutation({
+    mutationFn: async () => {
+      const response = await axiosInstance.post("/api/auth/validate", {});
+      return handleApiResponse(response) as any;
+    },
+    onSuccess: (data) => {
+      setLoginData({
+        userId: Number(data.userId),
+        accessToken: data.accessToken,
+      });
+    },
+    mutationKey: ["refresh"],
+    onError: (error: any) => {
+      setIsGuestUser(true);
+      console.error(error);
+    },
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,11 +68,13 @@ export default function useLoginForm() {
     }
 
     console.log(`email: ${loginForm.email}\t password: ${loginForm.password}`);
+    loginEmailMutation.mutateAsync(loginForm);
   };
 
   return {
     loginForm,
     handleChange,
     submitForm,
+    refreshTokenMutation,
   };
 }

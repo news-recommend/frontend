@@ -1,18 +1,65 @@
 "use client";
 
+import { axiosInstance, getJWTHeader, handleApiResponse } from "@/api";
+import { Profile } from "@/model/user";
+import { authStore } from "@/store/authStore";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function useProfileEditForm() {
+  const { accessToken } = authStore();
+  const { data, isLoading, error, isSuccess } = useQuery<Profile>({
+    queryKey: ["profile"],
+    enabled: !!accessToken,
+    queryFn: async ({ pageParam }) => {
+      const response = await axiosInstance.get(`/api/users/profile`, {
+        ...(accessToken && { headers: getJWTHeader(accessToken) }),
+      });
+      return handleApiResponse(response) as any;
+    },
+  });
   const [profileEditForm, setProfileEditForm] = useState({
     email: "",
     password: "",
     name: "",
     gender: "",
     ageGroup: "",
-    preferredTags: [],
+    preferredTags: [] as string[],
   });
+  const queryClient = useQueryClient();
+  const profileEditMutation = useMutation({
+    mutationFn: async (formData: any) => {
+      const response = await axiosInstance.put("/api/users/profile", formData, {
+        ...(accessToken && { headers: getJWTHeader(accessToken) }),
+      });
+      return handleApiResponse(response) as any;
+    },
+    onSuccess: (data: any) => {
+      queryClient.refetchQueries({
+        queryKey: ["profile"],
+      });
+    },
+    onError: (error: any) => {
+      console.error(error);
+      alert("회원 정보 변경에 실패하였습니다.");
+    },
+  });
+
   const router = useRouter();
+
+  useEffect(() => {
+    if (isSuccess && !isLoading) {
+      setProfileEditForm({
+        email: data?.email ?? "",
+        password: "",
+        name: data?.name ?? "",
+        gender: data?.gender ?? "",
+        ageGroup: data?.agegroup ?? "",
+        preferredTags: data?.preferredTags ?? [],
+      });
+    }
+  }, [isSuccess, isLoading]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProfileEditForm((prev) => ({
@@ -54,7 +101,7 @@ export default function useProfileEditForm() {
     }
 
     console.log(`submitData: ${profileEditForm}`);
-    router.push("/");
+    profileEditMutation.mutateAsync(profileEditForm);
 
     console.log(`email: ${profileEditForm.email}\t password: ${profileEditForm.password}`);
   };

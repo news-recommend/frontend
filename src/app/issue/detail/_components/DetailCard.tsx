@@ -1,8 +1,9 @@
 "use client";
+import { NewsItem } from "@/model/issue";
 import Link from "next/link";
 import React from "react";
 
-const DetailCard = () => {
+const DetailCard = ({ title, publishedAt, description }: NewsItem) => {
   return (
     <div className="py-[24px]">
       <Link
@@ -14,7 +15,7 @@ const DetailCard = () => {
         href={"#"}
         className="inline-block  box-border w-full  leading-[16px] text-[16px] overflow-hidden font-[500]  text-black "
       >
-        SKT “유심보호 서비스 가입 2천만명 넘길 전망
+        {title}
       </Link>
     </div>
   );

@@ -4,7 +4,10 @@ import Slider from "react-slick";
 import Image from "next/image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useBookmarkedList } from "../_hooks/useBookmarkedList";
 const BookmarkCarousel = () => {
+  const { data, isLoading } = useBookmarkedList();
+
   const settings = {
     dots: true,
     infinite: true,
@@ -40,16 +43,23 @@ const BookmarkCarousel = () => {
 
       <div className=" relative !w-[364px] mx-auto">
         <Slider {...settings}>
-          {[1, 2, 3, 4].map((item, index) => (
-            <div key={index} className=" box-border">
-              <div className="py-[10px] !w-[173px] px-[29px] rounded-[8px] border border-[#D9D9D9] bg-white text-center">
-                <div className="w-[115px] h-[66px] relative mx-auto">
-                  <Image src="/images/example1.jpg" alt="test" fill className="object-cover rounded" />
+          {!isLoading &&
+            data &&
+            data.map((item, index) => (
+              <div key={item.bookmarkId} className=" box-border">
+                <div className="py-[10px] !w-[173px] px-[29px] rounded-[8px] border border-[#D9D9D9] bg-white text-center">
+                  <div className="w-[115px] h-[66px] relative mx-auto">
+                    <Image
+                      src={item.thumbnail ?? "/images/example1.jpg"}
+                      alt={item.issueName}
+                      fill
+                      className="object-cover rounded"
+                    />
+                  </div>
+                  <span className="text-subtitle font-[600]">{item.issueName}</span>
                 </div>
-                <span className="text-subtitle font-[600]">Item {item}</span>
               </div>
-            </div>
-          ))}
+            ))}
         </Slider>
       </div>
     </div>

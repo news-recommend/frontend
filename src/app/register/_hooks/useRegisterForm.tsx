@@ -1,5 +1,8 @@
 "use client";
 
+import { axiosInstance, handleApiResponse } from "@/api";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -14,6 +17,20 @@ export default function useRegisterEmailForm() {
     preferredTags: [],
   });
   const router = useRouter();
+
+  const registerEmailMutation = useMutation({
+    mutationFn: async (formData: any) => {
+      const response = await axiosInstance.post("/api/users/signup", formData);
+      return handleApiResponse(response) as any;
+    },
+    onSuccess: (data: any) => {
+      router.replace("/login");
+    },
+    onError: (error: any) => {
+      console.error(error);
+      alert("회원가입에 실패하였습니다.");
+    },
+  });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRegisterForm((prev) => ({
@@ -81,6 +98,7 @@ export default function useRegisterEmailForm() {
     }
 
     console.log(`email: ${registerForm.email}\t password: ${registerForm.password}`);
+    registerEmailMutation.mutateAsync(registerForm);
   };
 
   return {
