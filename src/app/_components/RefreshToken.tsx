@@ -15,7 +15,7 @@ const RefreshToken = () => {
         refreshTokenMutation.mutateAsync();
       };
 
-      refreshAccessToken();
+      // refreshAccessToken();
     }
   }, [accessToken]);
   return null;
