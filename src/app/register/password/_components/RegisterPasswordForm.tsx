@@ -6,7 +6,7 @@ import useRegisterEmailForm from "../../_hooks/useRegisterForm";
 
 export default function RegisterPasswordForm() {
   const {
-    registerForm: { password, passwordConfirm },
+    registerForm: { password, passwordCheck },
     handleInputChange,
     submitForm,
   } = useRegisterEmailForm();
@@ -22,10 +22,10 @@ export default function RegisterPasswordForm() {
       />
       <div className="h-[17px]" />
       <Input
-        name="passwordConfirm"
-        id="passwordConfirm"
+        name="passwordCheck"
+        id="passwordCheck"
         type="password"
-        value={passwordConfirm}
+        value={passwordCheck}
         onChange={handleInputChange}
         placeholder="비밀번호 재입력"
       />

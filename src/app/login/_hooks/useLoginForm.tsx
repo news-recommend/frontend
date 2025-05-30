@@ -11,16 +11,25 @@ export default function useLoginForm() {
     email: "",
     password: "",
   });
-  const { setLoginData, clearLoginData, accessToken, resetData, setIsGuestUser } = authStore();
+  const {
+    setLoginData,
+    clearLoginData,
+    accessToken,
+    resetData,
+    setIsGuestUser,
+  } = authStore();
   const router = useRouter();
   const loginEmailMutation = useMutation({
     mutationFn: async (formData: any) => {
       const response = await axiosInstance.post("/api/users/login", formData);
+      console.log(response, "response");
       return handleApiResponse(response) as any;
     },
-    onSuccess: (data: any) => {
+    onSuccess: (response: any) => {
+      const data = response.data;
+      console.log(data, "data");
       setLoginData({
-        userId: Number(data.userId),
+        userId: 1,
         accessToken: data.accessToken,
       });
       router.replace("/");
@@ -33,12 +42,12 @@ export default function useLoginForm() {
 
   const refreshTokenMutation = useMutation({
     mutationFn: async () => {
-      const response = await axiosInstance.post("/api/auth/validate", {});
+      const response = await axiosInstance.get("/api/auth/validate", {});
       return handleApiResponse(response) as any;
     },
     onSuccess: (data) => {
       setLoginData({
-        userId: Number(data.userId),
+        userId: 1,
         accessToken: data.accessToken,
       });
     },
@@ -58,12 +67,13 @@ export default function useLoginForm() {
 
   const submitForm = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(loginForm);
     if (loginForm.email === "") {
       alert("이메일을 입력해야 합니다.");
       return;
     }
-    if (loginForm.password) {
-      alert("이메일을 입력해야 합니다.");
+    if (loginForm.password === "") {
+      alert("비밀번호를 입력해야 합니다.");
       return;
     }
 
