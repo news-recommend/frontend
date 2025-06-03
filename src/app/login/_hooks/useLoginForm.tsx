@@ -25,8 +25,7 @@ export default function useLoginForm() {
       console.log(response, "response");
       return handleApiResponse(response) as any;
     },
-    onSuccess: (response: any) => {
-      const data = response.data;
+    onSuccess: (data: any) => {
       console.log(data, "data");
       setLoginData({
         userId: 1,

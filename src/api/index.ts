@@ -21,8 +21,6 @@ export const axiosInstance = axios.create({
 export const handleApiResponse = <T>(
   response: AxiosResponse<ApiResponse<T | null>>
 ): T | null => {
-  console.log("response data", response);
-
   if (response.data.resultType !== "SUCCESS") {
     throw new Error("API call failed: Unexpected resultType");
   }
@@ -30,7 +28,7 @@ export const handleApiResponse = <T>(
   if (response.data?.error != null) {
     throw new Error(response.data.error?.reason || "Unknown error occurred");
   }
-
+  console.log("response data", response.data.success);
   return response.data.success;
 };
 
