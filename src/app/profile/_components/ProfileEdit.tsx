@@ -8,15 +8,37 @@ import Button from "@/components/shared/Button";
 import useProfileEditForm from "../_hooks/useProfileEdit";
 
 const ProfileEdit = () => {
-  const { submitForm } = useProfileEditForm();
+  const { submitForm, email, handleInputChange, password, name } =
+    useProfileEditForm();
   return (
     <div>
       <section className="px-[18px] mx-[24px] mt-[22px] py-[18px] border border-[#D9D9D9] bg-white rounded-[11px] ">
-        <ProfileEditInput name="email" id="email" label="이메일" placeholder="이메일" />
+        <ProfileEditInput
+          name="email"
+          value={email}
+          onChange={handleInputChange}
+          id="email"
+          label="이메일"
+          placeholder="이메일"
+        />
         <Bar />
-        <ProfileEditInput name="password" id="password" label="비밀번호" placeholder="비밀번호" />
+        <ProfileEditInput
+          name="password"
+          value={password}
+          onChange={handleInputChange}
+          id="password"
+          label="비밀번호"
+          placeholder="비밀번호"
+        />
         <Bar />
-        <ProfileEditInput name="name" id="name" label="이름" placeholder="이름" />
+        <ProfileEditInput
+          name="name"
+          value={name}
+          onChange={handleInputChange}
+          id="name"
+          label="이름"
+          placeholder="이름"
+        />
         <Bar />
         <ProfileEditGender />
         <Bar />

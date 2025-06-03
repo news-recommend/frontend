@@ -6,13 +6,13 @@ import React from "react";
 import useProfileEditForm from "../_hooks/useProfileEdit";
 
 const ProfileEditAgeGroup = () => {
-  const {
-    profileEditForm: { ageGroup },
-    handleChange,
-  } = useProfileEditForm();
+  const { ageGroup, handleChange } = useProfileEditForm();
   return (
     <div className="pl-[3px] flex flex-col gap-[5px]">
-      <label className="text-subtitle font-bold text-[#1F2937]" htmlFor={"ageGroup"}>
+      <label
+        className="text-subtitle font-bold text-[#1F2937]"
+        htmlFor={"ageGroup"}
+      >
         나이
       </label>
       <div className="flex  px-[28px] flex-wrap gap-[15px]">

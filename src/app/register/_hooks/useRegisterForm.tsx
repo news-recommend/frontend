@@ -16,7 +16,7 @@ export default function useRegisterEmailForm() {
     name,
     preferredTags,
     ageGroup,
-    handleChange: handleStateChane,
+    handleChange: handleStateChange,
     reset,
   } = signupStore();
   const router = useRouter();
@@ -37,12 +37,12 @@ export default function useRegisterEmailForm() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.name, e.target.value);
-    handleStateChane({ type: e.target.name, value: e.target.value });
+    handleStateChange({ type: e.target.name, value: e.target.value });
   };
 
   const handleChange = ({ type, value }: { type: string; value: any }) => {
     console.log(type, value);
-    handleStateChane({ type: type, value: value });
+    handleStateChange({ type: type, value: value });
   };
 
   const submitForm = (type: string, e: React.FormEvent) => {

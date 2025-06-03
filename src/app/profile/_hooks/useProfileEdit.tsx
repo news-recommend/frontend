@@ -3,6 +3,7 @@
 import { axiosInstance, getJWTHeader, handleApiResponse } from "@/api";
 import { Profile } from "@/model/user";
 import { authStore } from "@/store/authStore";
+import { profileEditStore } from "@/store/profileEditStore";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -19,14 +20,17 @@ export default function useProfileEditForm() {
       return handleApiResponse(response) as any;
     },
   });
-  const [profileEditForm, setProfileEditForm] = useState({
-    email: "",
-    password: "",
-    name: "",
-    gender: "",
-    ageGroup: "",
-    preferredTags: [] as string[],
-  });
+  const {
+    email,
+    password,
+    setProfileEditForm,
+    gender,
+    name,
+    preferredTags,
+    ageGroup,
+    handleChange: handleStateChange,
+    reset,
+  } = profileEditStore();
   const queryClient = useQueryClient();
   const profileEditMutation = useMutation({
     mutationFn: async (formData: any) => {
@@ -62,52 +66,61 @@ export default function useProfileEditForm() {
   }, [isSuccess, isLoading]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProfileEditForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    console.log(e.target.name, e.target.value);
+    handleStateChange({ type: e.target.name, value: e.target.value });
   };
 
   const handleChange = ({ type, value }: { type: string; value: any }) => {
-    setProfileEditForm((prev) => ({
-      ...prev,
-      [type]: value,
-    }));
+    console.log(type, value);
+    handleStateChange({ type: type, value: value });
   };
 
   const submitForm = () => {
-    if (profileEditForm.email === "") {
+    if (email === "") {
       alert("이메일을 입력해야 합니다.");
       return;
     }
 
-    if (profileEditForm.password === "") {
+    if (password === "") {
       alert("비밀번호를 입력해야 합니다.");
       return;
     }
 
-    if (profileEditForm.name === "") {
+    if (name === "") {
       alert("이름을 입력해야 합니다.");
       return;
     }
 
-    if (profileEditForm.ageGroup === "") {
+    if (ageGroup === "") {
       alert("연령대를 선택해야 합니다.");
       return;
     }
-    if (profileEditForm.gender === "") {
+    if (gender === "") {
       alert("성별을 선택해야 합니다.");
       return;
     }
 
-    console.log(`submitData: ${profileEditForm}`);
-    profileEditMutation.mutateAsync(profileEditForm);
+    profileEditMutation.mutateAsync({
+      email,
+      password,
 
-    console.log(`email: ${profileEditForm.email}\t password: ${profileEditForm.password}`);
+      gender,
+      name,
+      preferredTags,
+      ageGroup,
+    });
+
+    console.log(`email: ${email}\t password: ${password}`);
   };
 
   return {
-    profileEditForm,
+    email,
+    password,
+
+    gender,
+    name,
+    preferredTags,
+    ageGroup,
     handleInputChange,
     handleChange,
     submitForm,
