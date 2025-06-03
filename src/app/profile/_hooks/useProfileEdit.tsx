@@ -59,7 +59,7 @@ export default function useProfileEditForm() {
         password: "",
         name: data?.name ?? "",
         gender: data?.gender ?? "",
-        ageGroup: data?.agegroup ?? "",
+        ageGroup: data?.ageGroup ?? "",
         preferredTags: data?.interestCategory?.split(",") ?? [],
       });
     }
