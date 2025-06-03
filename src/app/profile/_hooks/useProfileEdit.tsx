@@ -60,7 +60,7 @@ export default function useProfileEditForm() {
         name: data?.name ?? "",
         gender: data?.gender ?? "",
         ageGroup: data?.agegroup ?? "",
-        preferredTags: data?.interestCategory ?? [],
+        preferredTags: data?.interestCategory?.split(",") ?? [],
       });
     }
   }, [isSuccess, isLoading]);
