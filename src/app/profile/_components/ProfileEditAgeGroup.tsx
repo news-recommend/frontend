@@ -7,6 +7,8 @@ import useProfileEditForm from "../_hooks/useProfileEdit";
 
 const ProfileEditAgeGroup = () => {
   const { ageGroup, handleChange } = useProfileEditForm();
+  console.log("ageGroup", ageGroup);
+
   return (
     <div className="pl-[3px] flex flex-col gap-[5px]">
       <label

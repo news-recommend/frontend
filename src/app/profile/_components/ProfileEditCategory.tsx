@@ -6,6 +6,7 @@ import useProfileEditForm from "../_hooks/useProfileEdit";
 
 const ProfileEditCategory = () => {
   const { handleChange, preferredTags } = useProfileEditForm();
+  console.log("preferredTags", preferredTags);
   return (
     <div className="pl-[3px] flex flex-col gap-[5px]">
       <label
