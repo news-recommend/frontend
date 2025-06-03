@@ -29,6 +29,7 @@ const ProfileEdit = () => {
           id="password"
           label="비밀번호"
           placeholder="비밀번호"
+          type="password"
         />
         <Bar />
         <ProfileEditInput
