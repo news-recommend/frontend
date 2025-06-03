@@ -3,7 +3,7 @@ import React from "react";
 import useProfileEditForm from "../_hooks/useProfileEdit";
 
 const ProfileEditGender = () => {
-  const { handleInputChange } = useProfileEditForm();
+  const { handleInputChange, gender } = useProfileEditForm();
   return (
     <div className="pl-[3px] flex flex-col gap-[5px]">
       <label
@@ -20,6 +20,7 @@ const ProfileEditGender = () => {
             id="gender-female"
             name="gender"
             value="여성"
+            checked={gender === "여성"}
           />
           <label
             className="inline-flex text-subtitle pt-2 "
@@ -35,6 +36,7 @@ const ProfileEditGender = () => {
             id="gender-male"
             name="gender"
             value="남성"
+            checked={gender === "남성"}
           />
           <label
             className="inline-flex h-[36px] text-subtitle pt-2 "
