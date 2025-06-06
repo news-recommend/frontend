@@ -29,9 +29,12 @@ export default function useBookmark() {
 
   const removeBookmarkMutation = useMutation({
     mutationFn: async (formData: any) => {
-      const response = await axiosInstance.delete(`/api/bookmarks?userId=${userId}&issueId=${formData.issueId}`, {
-        ...(accessToken && { headers: getJWTHeader(accessToken) }),
-      });
+      const response = await axiosInstance.delete(
+        `/api/bookmarks/${formData.issueId}`,
+        {
+          ...(accessToken && { headers: getJWTHeader(accessToken) }),
+        }
+      );
       return handleApiResponse(response) as any;
     },
     onSuccess: (data: any) => {
