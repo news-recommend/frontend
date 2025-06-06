@@ -35,7 +35,7 @@ export const useCategoryList = (category: string) => {
     getNextPageParam: (lastPage) => {
       console.log("lastPage", lastPage);
       if (
-        lastPage?.pagination?.hasNext ||
+        !lastPage?.pagination?.hasNext ||
         lastPage?.pagination?.currentPage + 1 ===
           lastPage?.pagination?.totalPages
       ) {

@@ -5,7 +5,15 @@ import { ICategoryIssueList, Issue } from "@/model/issue";
 import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
 
 export const useSearchResult = (keyword: string, sort: string) => {
-  const { data, isLoading, error, fetchNextPage, refetch, isFetching, hasNextPage } = useInfiniteQuery<
+  const {
+    data,
+    isLoading,
+    error,
+    fetchNextPage,
+    refetch,
+    isFetching,
+    hasNextPage,
+  } = useInfiniteQuery<
     ICategoryIssueList,
     Object,
     InfiniteData<ICategoryIssueList>,
@@ -20,7 +28,11 @@ export const useSearchResult = (keyword: string, sort: string) => {
     },
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      if (lastPage?.pagination?.hasNext || lastPage?.pagination?.currentPage + 1 === lastPage?.pagination?.totalPages) {
+      if (
+        !lastPage?.pagination?.hasNext ||
+        lastPage?.pagination?.currentPage + 1 ===
+          lastPage?.pagination?.totalPages
+      ) {
         return undefined;
       } else {
         return lastPage?.pagination?.currentPage + 1;
