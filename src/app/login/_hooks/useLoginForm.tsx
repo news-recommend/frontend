@@ -41,7 +41,7 @@ export default function useLoginForm() {
 
   const refreshTokenMutation = useMutation({
     mutationFn: async () => {
-      const response = await axiosInstance.get("/api/auth/reissue", {});
+      const response = await axiosInstance.get("/api/users/reissue", {});
       return handleApiResponse(response) as any;
     },
     onSuccess: (data) => {
