@@ -5,9 +5,9 @@ import FillBookmarkIcon from "@/components/shared/icons/FillBookmarkIcon";
 import { BookmarkedIssue } from "@/model/issue";
 import { useState } from "react";
 
-function groupBookmarksByCategory(bookmarks: BookmarkedIssue[]) {
+function groupBookmarksByCategory(bookmarks: BookmarkedIssue[] = []) {
   const map = new Map<string, BookmarkedIssue[]>();
-
+  console.log(bookmarks, "bookmarks");
   for (const item of bookmarks) {
     if (!map.has(item.category)) {
       map.set(item.category, []);
@@ -21,7 +21,13 @@ function groupBookmarksByCategory(bookmarks: BookmarkedIssue[]) {
   }));
 }
 
-const AccordionItem = ({ title, description }: { title: string; description: BookmarkedIssue[] }) => {
+const AccordionItem = ({
+  title,
+  description,
+}: {
+  title: string;
+  description: BookmarkedIssue[];
+}) => {
   const [current, setCurrent] = useState(false);
   const { removeBookmarkMutation } = useBookmark();
   const toggle = () => setCurrent((prev) => !prev);
@@ -44,8 +50,18 @@ const AccordionItem = ({ title, description }: { title: string; description: Boo
         onClick={toggle}
       >
         <span className="font-semibold text-[16px] ">{title}</span>
-        <div className={`${current ? "rotate-180" : "rotate-0"} transition-transform duration-300`}>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div
+          className={`${
+            current ? "rotate-180" : "rotate-0"
+          } transition-transform duration-300`}
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               d="M15 7.5L10 12.5L5 7.5"
               stroke="#1E1E1E"
@@ -91,15 +107,18 @@ const AccordionItem = ({ title, description }: { title: string; description: Boo
 };
 
 const BookmarkAccordion = () => {
-  const { data, isLoading, error } = useBookmarkedList();
-  if (!data && !isLoading) {
+  const { data, isLoading, error, isFetching } = useBookmarkedList();
+  if (!data && !isFetching) {
     return <></>;
   }
+  console.log(data, isLoading, "data");
   const groupedData = groupBookmarksByCategory(data!);
   return (
     <div className="w-full max-w-xl px-[24px]">
       <ul className="border border-[#D9D9D9] rounded-[10px] overflow-hidden p-0 m-0 list-none">
-        {!isLoading && data && groupedData.map((d) => <AccordionItem {...d} key={d.title} />)}
+        {!isLoading &&
+          data &&
+          groupedData.map((d) => <AccordionItem {...d} key={d.title} />)}
       </ul>
     </div>
   );

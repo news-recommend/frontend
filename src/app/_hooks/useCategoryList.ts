@@ -32,6 +32,7 @@ export const useCategoryList = (category: string) => {
       return handleApiResponse(response) as any;
     },
     initialPageParam: 1,
+    enabled: !!accessToken,
     getNextPageParam: (lastPage) => {
       console.log("lastPage", lastPage);
       if (

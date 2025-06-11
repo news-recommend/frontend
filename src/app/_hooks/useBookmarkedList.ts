@@ -3,11 +3,15 @@
 import { axiosInstance, getJWTHeader, handleApiResponse } from "@/api";
 import { BookmarkedIssue } from "@/model/issue";
 import { authStore } from "@/store/authStore";
-import { InfiniteData, useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import {
+  InfiniteData,
+  useInfiniteQuery,
+  useQuery,
+} from "@tanstack/react-query";
 
 export const useBookmarkedList = () => {
   const { accessToken } = authStore();
-  const { data, isLoading, error } = useQuery<BookmarkedIssue[]>({
+  const { data, isLoading, error, isFetching } = useQuery<BookmarkedIssue[]>({
     queryKey: ["bookmarkedList"],
     enabled: !!accessToken,
     queryFn: async ({ pageParam }) => {
@@ -21,5 +25,6 @@ export const useBookmarkedList = () => {
     data,
     isLoading,
     error,
+    isFetching,
   };
 };
