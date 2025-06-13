@@ -3,10 +3,11 @@
 import { axiosInstance, handleApiResponse } from "@/api";
 import { authStore } from "@/store/authStore";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function useLoginForm() {
+  const pathname = usePathname();
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
@@ -53,8 +54,12 @@ export default function useLoginForm() {
     },
     mutationKey: ["refresh"],
     onError: (error: any) => {
-      setIsGuestUser(true);
-      console.error(error);
+      if (pathname?.startsWith("/register") || pathname === "/login") {
+        setIsGuestUser(true);
+        console.error(error);
+      } else {
+        router.replace("/login");
+      }
     },
   });
 

@@ -12,7 +12,7 @@ interface ApiResponse<T> {
 
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || process.env.API_BASE_URL,
-  timeout: 5000,
+  timeout: 30000,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
