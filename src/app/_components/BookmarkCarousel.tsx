@@ -17,7 +17,9 @@ const BookmarkCarousel = () => {
     swipeToSlide: true,
     nextArrow: <CustomRightArrow />,
     prevArrow: <CustomLeftArrow />,
-    customPaging: (i: any) => <div className="w-1 h-1 rounded-full mx-1 cursor-pointer" />,
+    customPaging: (i: any) => (
+      <div className="w-1 h-1 rounded-full mx-1 cursor-pointer" />
+    ),
     dotsClass: "slick-dots flex justify-center items-center mt-4",
     appendDots: (dots: any) => (
       <div>
@@ -29,7 +31,13 @@ const BookmarkCarousel = () => {
   return (
     <div>
       <div className="flex items-center px-[24px] mt-[34px] mb-[9px]">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M9.99984 1.66669L12.5748 6.88335L18.3332 7.72502L14.1665 11.7834L15.1498 17.5167L9.99984 14.8084L4.84984 17.5167L5.83317 11.7834L1.6665 7.72502L7.42484 6.88335L9.99984 1.66669Z"
             stroke="#1E1E1E"
@@ -38,7 +46,9 @@ const BookmarkCarousel = () => {
             strokeLinejoin="round"
           />
         </svg>
-        <h3 className="text-title text-[#1F2937] leading-[20px] font-bold ml-[4px]">북마크한 이슈</h3>
+        <h3 className="text-title text-[#1F2937] leading-[20px] font-bold ml-[4px]">
+          북마크한 이슈
+        </h3>
       </div>
 
       <div className=" relative !w-[364px] mx-auto">
@@ -50,13 +60,15 @@ const BookmarkCarousel = () => {
                 <div className="py-[10px] !w-[173px] px-[29px] rounded-[8px] border border-[#D9D9D9] bg-white text-center">
                   <div className="w-[115px] h-[66px] relative mx-auto">
                     <Image
-                      src={item.thumbnail ?? "/images/example1.jpg"}
+                      src={"/images/example1.jpg"}
                       alt={item.issueName}
                       fill
                       className="object-cover rounded"
                     />
                   </div>
-                  <span className="text-subtitle font-[600]">{item.issueName}</span>
+                  <span className="text-subtitle font-[600]">
+                    {item.issueName}
+                  </span>
                 </div>
               </div>
             ))}
