@@ -9,7 +9,11 @@ interface SelectProps {
   noneValue?: string;
   width?: "fit-content" | "100%";
 }
-const list = ["최신순", "관련도순", "오래된순"];
+const list = [
+  { title: "최신순", value: "latest" },
+  { title: "북마크순", value: "popular" },
+  { title: "오래된순", value: "oldest" },
+];
 const Select = ({
   id,
   width = "fit-content",
@@ -22,7 +26,7 @@ const Select = ({
 
   const searchParams = useSearchParams();
   const router = useRouter();
-  const initValue = searchParams?.get("sort") ?? "최신순";
+  const initValue = searchParams?.get("sort") ?? "latest";
 
   const [value, setValue] = useState(initValue);
 
@@ -84,10 +88,29 @@ const Select = ({
             className="w-full min-w-[100px] min-h-[22px] px-[9px] py-[5px] text-sm font-normal text-black flex justify-between items-center gap-2"
             onClick={() => setActive(!active)}
           >
-            {value ? value : <div className="text-black">{noneValue}</div>}
-            <div className={`${active ? "rotate-180" : "rotate-0"} transition-transform duration-300`}>
-              <svg width="8" height="4" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 0.5L4 3.5L7 0.5" stroke="#1E1E1E" strokeLinecap="round" strokeLinejoin="round" />
+            {value ? (
+              list.find((item) => value === item.value)?.title
+            ) : (
+              <div className="text-black">{noneValue}</div>
+            )}
+            <div
+              className={`${
+                active ? "rotate-180" : "rotate-0"
+              } transition-transform duration-300`}
+            >
+              <svg
+                width="8"
+                height="4"
+                viewBox="0 0 8 4"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1 0.5L4 3.5L7 0.5"
+                  stroke="#1E1E1E"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </div>
           </button>
@@ -97,18 +120,20 @@ const Select = ({
               active ? "max-h-[170px]" : "h-0 overflow-hidden"
             }`}
           >
-            {list.map((element: string, index) => (
+            {list.map(({ title, value }, index) => (
               <div
-                onClick={() => changeValue(element)}
-                key={element}
+                onClick={() => changeValue(value)}
+                key={value}
                 className="flex gap-[7px] mt-[3px] px-[9px] hover:bg-gray-100"
               >
                 <li
-                  className={`py-2 text-sm font-medium transition-opacity transition-transform duration-200 ${
-                    animatedItems[index] ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                  className={`py-2 text-sm font-medium transition-opacity duration-200 ${
+                    animatedItems[index]
+                      ? "opacity-100 scale-100"
+                      : "opacity-0 scale-0"
                   }`}
                 >
-                  {element}
+                  {title}
                 </li>
               </div>
             ))}

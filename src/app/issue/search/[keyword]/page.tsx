@@ -4,6 +4,7 @@ import Select from "@/components/Select";
 import SearchPosts from "./_components/SearchPosts";
 
 const SearchKeywordPage = () => {
+  console.log("searchkeyword");
   return (
     <div className="pt-[27px] px-[24px]">
       <IssueSearch />

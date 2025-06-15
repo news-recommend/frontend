@@ -8,10 +8,15 @@ import useInfiniteScroll from "@/app/_hooks/useInfiniteScroll";
 
 const SearchPosts = () => {
   const searchParams = useSearchParams();
-  const keyword = decodeURIComponent((searchParams.get("keyword") as string) ?? "") ?? "";
-  const sort = decodeURIComponent((searchParams.get("sort") as string) ?? "최신순") ?? "최신순";
+  console.log("123");
+  const keyword =
+    decodeURIComponent((searchParams.get("keyword") as string) ?? "") ?? "";
+  const sort =
+    decodeURIComponent((searchParams.get("sort") as string) ?? "latest") ??
+    "latest";
   const [ref, inView] = useInView();
-  const { isFetching, hasNextPage, fetchNextPage, data, isLoading } = useSearchResult(keyword, sort);
+  const { isFetching, hasNextPage, fetchNextPage, data, isLoading } =
+    useSearchResult(keyword, sort);
   useInfiniteScroll(() => {
     if (inView) {
       !isFetching && hasNextPage && fetchNextPage();

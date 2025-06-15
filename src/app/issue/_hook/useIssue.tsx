@@ -1,10 +1,12 @@
 "use client";
 
-import { axiosInstance, handleApiResponse } from "@/api";
+import { axiosInstance, getJWTHeader, handleApiResponse } from "@/api";
 import { ICategoryIssueList, IIssueDetailList, Issue } from "@/model/issue";
+import { authStore } from "@/store/authStore";
 import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
 
 export const useIssue = (issueId: string) => {
+  const { accessToken } = authStore();
   const {
     data,
     isLoading,
@@ -22,7 +24,8 @@ export const useIssue = (issueId: string) => {
     queryKey: ["issueDetailList", issueId],
     queryFn: async ({ pageParam }) => {
       const response = await axiosInstance.get(
-        `/api/issues/news/analyze?issueId=${issueId}&page=${pageParam}&size=10`
+        `/api/issues/news/analyze?issueId=${issueId}&page=${pageParam}&size=10`,
+        { ...(accessToken && { headers: getJWTHeader(accessToken) }) }
       );
       return handleApiResponse(response) as any;
     },

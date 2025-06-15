@@ -5,33 +5,31 @@ import { FormEvent, useEffect, useState } from "react";
 
 const useSearch = () => {
   const params = useParams();
-  const initKeyword = decodeURIComponent((params?.keyword as string) ?? "") ?? "";
+  const initKeyword =
+    decodeURIComponent((params?.keyword as string) ?? "") ?? "";
   const [keyword, setKeyword] = useState(initKeyword);
 
   const router = useRouter();
-  const [debouncedValue, setDebouncedValue] = useState<string>(keyword);
   const searchParams = useSearchParams();
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(keyword);
-    }, 750);
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [keyword]);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const newSearchParams = new URLSearchParams(searchParams?.toString());
 
-    newSearchParams.set("keyword", debouncedValue);
-    router.push(`/issue/search/${debouncedValue}?${newSearchParams}`);
+    console.log("keyword", keyword);
+    if (!keyword) {
+      console.log("Empty keyword, skipping");
+      return;
+    }
+
+    const newSearchParams = new URLSearchParams(searchParams?.toString());
+    newSearchParams.set("keyword", keyword);
+    router.push(`/issue/search/${keyword}?${newSearchParams}`);
   };
 
   return {
     keyword,
     setKeyword,
-    debouncedValue,
+
     onSubmit,
   };
 };

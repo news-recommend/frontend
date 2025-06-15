@@ -10,7 +10,8 @@ const DetailPosts = () => {
   const params = useParams();
   const issueId = (params?.issueId as string) ?? "";
   const [ref, inView] = useInView();
-  const { isFetching, hasNextPage, fetchNextPage, data, isLoading } = useIssue(issueId);
+  const { isFetching, hasNextPage, fetchNextPage, data, isLoading } =
+    useIssue(issueId);
   useInfiniteScroll(() => {
     if (inView) {
       !isFetching && hasNextPage && fetchNextPage();

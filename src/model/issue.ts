@@ -21,7 +21,7 @@ export type Issue = {
   issueName: string;
   category: string;
   sentimentTrend: number[];
-  newsList: NewsItem[];
+  newsList: string[];
   thumbnail: string | null;
 };
 
