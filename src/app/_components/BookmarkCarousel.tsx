@@ -1,12 +1,22 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
-import Image from "next/image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useBookmarkedList } from "../_hooks/useBookmarkedList";
+
 const BookmarkCarousel = () => {
   const { data, isLoading } = useBookmarkedList();
+  const cardRefs = useRef<HTMLDivElement[]>([]);
+  const [maxHeight, setMaxHeight] = useState<number>(0);
+
+  useEffect(() => {
+    if (data && data.length > 0) {
+      const heights = cardRefs.current.map((el) => el?.offsetHeight || 0);
+      const max = Math.max(...heights);
+      setMaxHeight(max);
+    }
+  }, [data]);
 
   const settings = {
     dots: true,
@@ -17,13 +27,13 @@ const BookmarkCarousel = () => {
     swipeToSlide: true,
     nextArrow: <CustomRightArrow />,
     prevArrow: <CustomLeftArrow />,
-    customPaging: (i: any) => (
+    customPaging: () => (
       <div className="w-1 h-1 rounded-full mx-1 cursor-pointer" />
     ),
     dotsClass: "slick-dots flex justify-center items-center mt-4",
     appendDots: (dots: any) => (
       <div>
-        <ul style={{ margin: "0px" }}> {dots} </ul>
+        <ul style={{ margin: "0px" }}>{dots}</ul>
       </div>
     ),
   };
@@ -51,32 +61,57 @@ const BookmarkCarousel = () => {
         </h3>
       </div>
 
-      <div className=" relative !w-[364px] mx-auto">
-        <Slider {...settings}>
-          {!isLoading &&
-            data &&
-            data.map((item, index) => (
-              <div key={item.bookmarkId} className=" box-border">
-                <div className="py-[10px] !w-[173px] px-[29px] rounded-[8px] border border-[#D9D9D9] bg-white text-center">
-                  <div className="w-[115px] h-[66px] relative mx-auto">
-                    <Image
-                      src={"/images/example1.jpg"}
-                      alt={item.issueName}
-                      fill
-                      className="object-cover rounded"
-                    />
-                  </div>
-                  <span className="text-subtitle font-[600]">
-                    {item.issueName}
-                  </span>
-                </div>
+      <div className="relative !w-[364px] mx-auto">
+        {!isLoading && data && data.length >= 3 ? (
+          <Slider {...settings}>
+            {data.map((item, index) => (
+              <div
+                key={item.issueId}
+                className="box-border flex justify-center"
+              >
+                <BookmarkCard
+                  item={item}
+                  ref={(el) => {
+                    if (el) cardRefs.current[index] = el;
+                  }}
+                  height={maxHeight}
+                />
               </div>
             ))}
-        </Slider>
+          </Slider>
+        ) : (
+          <div className="flex justify-center gap-3 items-stretch">
+            {data?.map((item, index) => (
+              <BookmarkCard
+                key={item.issueId}
+                item={item}
+                ref={(el) => {
+                  if (el) cardRefs.current[index] = el;
+                }}
+                height={maxHeight}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 };
+
+// 카드 컴포넌트 – forwardRef로 참조 가능하게 하고, 높이 props로 제어
+const BookmarkCard = React.forwardRef<
+  HTMLDivElement,
+  { item: any; height: number }
+>(({ item, height }, ref) => (
+  <div
+    ref={ref}
+    className="py-[10px] !w-[173px] px-[29px] rounded-[8px] border border-[#D9D9D9] bg-white text-center flex flex-col justify-center"
+    style={{ height: height || "auto" }}
+  >
+    <span className="text-subtitle font-[600]">{item.issueName}</span>
+  </div>
+));
+BookmarkCard.displayName = "BookmarkCard";
 
 const CustomRightArrow = (props: any) => {
   const { onClick } = props;

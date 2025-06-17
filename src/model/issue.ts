@@ -20,16 +20,28 @@ export type Issue = {
   issueId: number;
   issueName: string;
   category: string;
-  sentimentTrend: number[];
+
   newsList: string[];
   thumbnail: string | null;
 };
 
-export type BookmarkedIssue = Issue & {
-  bookmarkId: number;
+export type IssueDetail = {
+  issueId: number;
+  issueName: string;
+  category: string;
+
+  newsList: News[];
+  thumbnail: string | null;
 };
 
-export type IIssueDetailList = {
-  pagination: Pagination;
-  newsList: NewsItem[];
+export type News = {
+  title: string;
+  description: string;
+  link: string;
+  pubDate: string;
+  sentimentScore: number;
+};
+
+export type BookmarkedIssue = Issue & {
+  bookmarkId: number;
 };

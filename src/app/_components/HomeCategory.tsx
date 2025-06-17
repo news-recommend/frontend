@@ -22,7 +22,7 @@ const PREFERRED_TAGS = [
 
 const HomeCategory = () => {
   const searchParams = useSearchParams();
-  const category = searchParams?.get("category") ?? "ALL";
+  const category = searchParams?.get("category") ?? "정치";
   const router = useRouter();
 
   const clickTag = (value: string) => () => {
@@ -40,7 +40,9 @@ const HomeCategory = () => {
           <div
             onClick={clickTag(tag)}
             className={`shrink-0 cursor-pointer px-[8px] pb-[9px] mb-[2px] ${
-              category === tag ? "text-[#57869F] border-[#57869F] " : "text-[#A0CCCD] border-[#A0cccd]"
+              category === tag
+                ? "text-[#57869F] border-[#57869F] "
+                : "text-[#A0CCCD] border-[#A0cccd]"
             } border-b-2  text-header w-fit`}
             key={tag}
           >

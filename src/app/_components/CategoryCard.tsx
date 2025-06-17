@@ -15,7 +15,7 @@ const CategoryCard = ({
   console.log("newslit", newsList);
   return (
     <article
-      onClick={() => router.push(`/issue/detail/${issueId}`)}
+      onClick={() => router.push(`/issue/detail/${issueId}?name=${issueName}`)}
       className="bg-white cursor-pointer rounded-[8px]  relative overflow-hidden w-full px-[15px] py-[14px] border flex items-center gap-[13px] border-[#D9D9D9]"
     >
       {/* <div className=" shrink-0 w-[82px] h-[82px] relative mx-auto">

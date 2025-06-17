@@ -18,7 +18,7 @@ export default function useBookmark() {
     },
     onSuccess: (data: any) => {
       queryClient.invalidateQueries({
-        queryKey: [""],
+        queryKey: ["bookmarkedList"],
       });
     },
     onError: (error: any) => {
@@ -39,7 +39,7 @@ export default function useBookmark() {
     },
     onSuccess: (data: any) => {
       queryClient.invalidateQueries({
-        queryKey: [""],
+        queryKey: ["bookmarkedList"],
       });
     },
     onError: (error: any) => {
