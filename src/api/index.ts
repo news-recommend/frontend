@@ -27,7 +27,7 @@ export const handleApiResponse = <T>(response: AxiosResponse<ApiResponse<T | nul
   if (response.data?.error != null) {
     throw new Error(response.data.error?.reason || "Unknown error occurred");
   }
-  console.log("response data1", response.data.success);
+  console.log("response data2", response.data.success);
   return response.data.success;
 };
 
