@@ -76,6 +76,10 @@
   background-color: #000; /* black */
 }
 
+button {
+  cursor: pointer;
+}
+
 [type="radio"],
 span {
   vertical-align: middle;
