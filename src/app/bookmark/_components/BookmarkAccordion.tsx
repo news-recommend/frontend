@@ -95,12 +95,12 @@ const BookmarkAccordion = () => {
   const { data, isLoading, error, isFetching } = useBookmarkedList();
   if (!isFetching && data?.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen text-center px-4 bg-gray-50">
+      <div className="flex flex-col  justify-center  text-center px-4 bg-gray-50">
         <h2 className="text-2xl font-semibold text-gray-800 mb-2">북마크 목록이 없습니다</h2>
         <p className="text-gray-600 mb-6">지금 마음에 드는 이슈를 추가해보세요!</p>
         <Link
           href="/"
-          className="inline-block px-6 py-3 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 transition"
+          className="inline-block px-6 py-3 bg-[#A0CCCD]  text-sm font-medium rounded-lg shadow hover:bg-blue-700 transition"
         >
           홈으로 가기
         </Link>

@@ -85,6 +85,7 @@ const BookmarkCarousel = () => {
           </div>
         )}
       </div>
+      <div className="mx-[24px] mt-[45px] h-[2px]  bg-[#57869F]" />
     </div>
   );
 };
