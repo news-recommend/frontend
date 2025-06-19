@@ -13,9 +13,9 @@ const DetailPosts = () => {
 
   if (isLoading) {
     return (
-      <>
+      <div className="pt-16 flex justify-center ">
         <ClockLoader color={"#A0CCCD"} />
-      </>
+      </div>
     );
   }
   return (
