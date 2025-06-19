@@ -12,7 +12,6 @@ const CategoryCard = ({
   newsList,
 }: Issue) => {
   const router = useRouter();
-  console.log("newslit", newsList);
   return (
     <article
       onClick={() => router.push(`/issue/detail/${issueId}?name=${issueName}`)}
@@ -33,7 +32,7 @@ const CategoryCard = ({
         >
           {issueName}
         </div>
-        {[...newsList].slice(1, 3).map((news, index) => (
+        {[...newsList].slice(0, 3).map((news, index) => (
           <div
             key={index}
             className="text-body font-[400] leading-[14px] overflow-hidden"
