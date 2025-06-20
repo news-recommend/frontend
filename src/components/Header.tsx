@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import BackButton from "./BackButton";
 import useHeaderNavigation from "../hooks/useHeaderNavigation";
 import { authStore } from "@/store/authStore";
@@ -10,7 +10,7 @@ export default function Header() {
   const { headerTitle, checkRoute } = useHeaderNavigation();
   const router = useRouter();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (accessToken && (checkRoute.exact("/login") || checkRoute.startsWith("/register"))) {
       router.replace("/");
     }
