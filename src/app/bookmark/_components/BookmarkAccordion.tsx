@@ -100,7 +100,7 @@ const BookmarkAccordion = () => {
         <p className="text-gray-600 mb-6">지금 마음에 드는 이슈를 추가해보세요!</p>
         <Link
           href="/"
-          className="inline-block px-6 py-3 bg-[#A0CCCD]  text-sm font-medium rounded-lg shadow hover:bg-blue-700 transition"
+          className="inline-block px-6 py-3 bg-[#A0CCCD]  text-sm font-medium rounded-lg shadow  transition"
         >
           홈으로 가기
         </Link>
